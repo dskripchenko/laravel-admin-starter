@@ -1,14 +1,30 @@
 {
     "name": "dskripchenko/laravel-admin-starter",
     "description": "Готовые системные Resource'ы (Users, Roles, AuditLog, Settings, Translations, ContentBlocks) для dskripchenko/laravel-admin.",
-    "license": "MIT",
     "type": "library",
+    "keywords": [
+        "laravel",
+        "admin",
+        "starter",
+        "users",
+        "roles",
+        "audit",
+        "settings",
+        "translations",
+        "dskripchenko"
+    ],
+    "homepage": "https://github.com/dskripchenko/laravel-admin-starter",
+    "license": "MIT",
     "authors": [
         {
             "name": "Denis Skripchenko",
             "email": "denskrp90@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/dskripchenko/laravel-admin-starter/issues",
+        "source": "https://github.com/dskripchenko/laravel-admin-starter"
+    },
     "require": {
         "php": "^8.5",
         "dskripchenko/laravel-admin": "^1.0"
@@ -35,11 +51,14 @@
             "providers": [
                 "Dskripchenko\\LaravelAdminStarter\\AdminStarterServiceProvider"
             ]
+        },
+        "branch-alias": {
+            "dev-main": "1.x-dev"
         }
     },
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
