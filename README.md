@@ -1,13 +1,33 @@
 # dskripchenko/laravel-admin-starter
 
-Готовые системные Resource'ы для `dskripchenko/laravel-admin`: Users, Roles, AuditLog, Settings, Translations, ContentBlocks.
+> 🌐 **English** · [Русский](README.ru.md) · [Deutsch](README.de.md) · [中文](README.zh.md)
 
-Полная спецификация: [../../docs/sister-packs/starter.md](../../docs/sister-packs/starter.md).
+Out-of-the-box admin resources: Users, Roles, AuditLog, Settings, Translations, ContentBlocks. Drop-in starting point for new admins.
 
-## Статус
+A sister-pack for [`dskripchenko/laravel-admin`](https://github.com/dskripchenko/laravel-admin).
 
-Локальный dev (часть монорепо `dskripchenko/laravel-admin`). Перед первым релизом будет вынесен в отдельный репозиторий.
+[![Packagist](https://img.shields.io/packagist/v/dskripchenko/laravel-admin-starter)](https://packagist.org/packages/dskripchenko/laravel-admin-starter)
+[![License](https://img.shields.io/packagist/l/dskripchenko/laravel-admin-starter)](LICENSE)
 
-## Лицензия
+## Install
 
-MIT.
+```bash
+composer require dskripchenko/laravel-admin-starter
+php artisan migrate
+```
+
+The plugin auto-registers via Laravel package discovery. To publish the
+config:
+
+```bash
+php artisan vendor:publish --tag=starter-config
+```
+
+## Documentation
+
+- [Getting started](docs/en/getting-started.md)
+- [Usage](docs/en/usage.md)
+
+## License
+
+[MIT](LICENSE) © Denis Skripchenko
