@@ -8,6 +8,9 @@ use Dskripchenko\LaravelAdmin\Audit\AuditLog;
 use Dskripchenko\LaravelAdmin\Filter\DateRangeFilter;
 use Dskripchenko\LaravelAdmin\Filter\InputFilter;
 use Dskripchenko\LaravelAdmin\Filter\OptionsFilter;
+use Dskripchenko\LaravelAdmin\Infolist\BadgeEntry;
+use Dskripchenko\LaravelAdmin\Infolist\KeyValueEntry;
+use Dskripchenko\LaravelAdmin\Infolist\TextEntry;
 use Dskripchenko\LaravelAdmin\Resource\Resource;
 use Dskripchenko\LaravelAdmin\Table\TableColumn;
 use Illuminate\Database\Eloquent\Builder;
@@ -88,5 +91,31 @@ final class AuditLogResource extends Resource
     public function indexQuery(): Builder
     {
         return $this->modelQuery()->orderByDesc('created_at');
+    }
+
+    public function infolist(): array
+    {
+        return [
+            TextEntry::make('id')->label('ID'),
+            BadgeEntry::make('event')->label('Событие')->map([
+                'created' => 'success',
+                'updated' => 'info',
+                'deleted' => 'danger',
+                'restored' => 'warning',
+                'login' => 'info',
+                'logout' => 'default',
+                'login_failed' => 'danger',
+            ]),
+            TextEntry::make('actor_type')->label('Actor type')->copyable(),
+            TextEntry::make('actor_id')->label('Actor id'),
+            TextEntry::make('subject_type')->label('Subject type')->copyable(),
+            TextEntry::make('subject_id')->label('Subject id'),
+            TextEntry::make('ip')->label('IP')->copyable(),
+            TextEntry::make('user_agent')->label('User-Agent'),
+            TextEntry::make('url')->label('URL')->copyable(),
+            TextEntry::make('created_at')->label('Создано')->asDateTime(),
+            KeyValueEntry::make('changes')->label('Изменения')
+                ->keyLabel('Поле')->valueLabel('Значение'),
+        ];
     }
 }
