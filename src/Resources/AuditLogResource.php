@@ -97,7 +97,7 @@ final class AuditLogResource extends Resource
     {
         return [
             TextEntry::make('id')->label('ID'),
-            BadgeEntry::make('event')->label('Событие')->map([
+            BadgeEntry::make('event')->label('Событие')->colors([
                 'created' => 'success',
                 'updated' => 'info',
                 'deleted' => 'danger',

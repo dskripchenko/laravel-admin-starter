@@ -103,12 +103,9 @@ final class RoleResource extends Resource
         $resourceGroups = [];
         $groupRoots = [];
         foreach ($resources->all() as $slug => $class) {
-            if (! is_string($class) || ! method_exists($class, 'permission')) {
-                continue;
-            }
             $base = $class::permission();
-            $label = method_exists($class, 'label') ? (string) $class::label() : $slug;
-            if (! is_string($base) || $base === '') {
+            $label = (string) $class::label();
+            if ($base === '') {
                 continue;
             }
             $resourceBases[$base] = $label;
@@ -137,7 +134,9 @@ final class RoleResource extends Resource
         }
         $extraByResource = [];
         foreach (app(PermissionRegistry::class)->flat() as $key) {
-            if (isset($covered[$key])) continue;
+            if (isset($covered[$key])) {
+                continue;
+            }
             // Сопоставляем custom-key с ближайшим Resource по prefix'у.
             $matched = null;
             foreach ($resourceBases as $base => $label) {
