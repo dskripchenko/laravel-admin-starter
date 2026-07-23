@@ -15,6 +15,7 @@ use Dskripchenko\LaravelAdmin\Permission\PermissionRegistry;
 use Dskripchenko\LaravelAdmin\Resource\Resource;
 use Dskripchenko\LaravelAdmin\Resource\ResourceRegistry;
 use Dskripchenko\LaravelAdmin\Table\TableColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * RoleResource — CRUD над `admin_roles`.
@@ -46,6 +47,25 @@ final class RoleResource extends Resource
     public static function label(): string
     {
         return 'Роли';
+    }
+
+    /**
+     * Базовый query — скрывает роли иного домена (config
+     * `admin.roles.hidden_slug_prefixes`, напр. `client-*` из ADR-017). Один
+     * override закрывает и список, и прямой read/update/delete по URL, т.к.
+     * base Resource читает одиночную запись через modelQuery() (BL-3).
+     */
+    public function modelQuery(): Builder
+    {
+        $query = parent::modelQuery();
+
+        foreach ((array) config('admin.roles.hidden_slug_prefixes', []) as $prefix) {
+            if (is_string($prefix) && $prefix !== '') {
+                $query->where('slug', 'not like', $prefix.'%');
+            }
+        }
+
+        return $query;
     }
 
     public function fields(): array
