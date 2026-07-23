@@ -52,13 +52,13 @@ final class UserResource extends Resource
             Input::make('email')->required()->title(__('Email')),
             Password::make('password')->onCreate()->onUpdate(false)->required()->title(__('Пароль')),
             Select::make('locale')->options([
-                'ru' => 'Русский',
+                'ru' => __('Русский'),
                 'en' => 'English',
             ])->title(__('Локаль')),
             Select::make('theme')->options([
-                'light' => 'Светлая',
-                'dark' => 'Тёмная',
-                'system' => 'Как в системе',
+                'light' => __('Светлая'),
+                'dark' => __('Тёмная'),
+                'system' => __('Как в системе'),
             ])->title(__('Тема')),
             Switcher::make('is_active')->title(__('Активен')),
         ];
@@ -74,7 +74,7 @@ final class UserResource extends Resource
                 'ru' => 'default',
                 'en' => 'info',
             ]),
-            TableColumn::make('is_active')->asBoolean('Активен', 'Заблокирован'),
+            TableColumn::make('is_active')->asBoolean(__('Активен'), __('Заблокирован')),
             TableColumn::make('created_at')->sort()->asDateTime(),
         ];
     }
@@ -84,11 +84,11 @@ final class UserResource extends Resource
         return [
             InputFilter::for('email')->label(__('Email')),
             OptionsFilter::for('is_active')->label(__('Статус'))->options([
-                '1' => 'Активные',
-                '0' => 'Заблокированные',
+                '1' => __('Активные'),
+                '0' => __('Заблокированные'),
             ]),
             OptionsFilter::for('locale')->label(__('Локаль'))->options([
-                'ru' => 'Русский',
+                'ru' => __('Русский'),
                 'en' => 'English',
             ]),
         ];

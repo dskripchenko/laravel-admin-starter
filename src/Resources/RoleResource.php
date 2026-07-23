@@ -168,7 +168,7 @@ final class RoleResource extends Resource
             if ($matched !== null) {
                 $extraByResource[$matched][] = $key;
             } else {
-                $extraByResource['Прочие'][] = $key;
+                $extraByResource[(string) __('Прочие')][] = $key;
             }
         }
         // Добавляем custom-keys в существующие resource-группы либо в "Прочие".
@@ -178,7 +178,7 @@ final class RoleResource extends Resource
             }
         }
         unset($g);
-        $miscItems = $extraByResource['Прочие'] ?? [];
+        $miscItems = $extraByResource[(string) __('Прочие')] ?? [];
 
         // Wildcard-группы сверху для скейл-grant'а.
         $globalWildcards = ['*', 'admin.*', 'admin.*.view', 'admin.*.create', 'admin.*.update', 'admin.*.delete'];
@@ -190,10 +190,10 @@ final class RoleResource extends Resource
         sort($groupWildcards);
 
         $result = [
-            ['label' => 'Все права', 'items' => $globalWildcards],
+            ['label' => (string) __('Все права'), 'items' => $globalWildcards],
         ];
         if ($groupWildcards !== []) {
-            $result[] = ['label' => 'Группы разделов', 'items' => $groupWildcards];
+            $result[] = ['label' => (string) __('Группы разделов'), 'items' => $groupWildcards];
         }
         // Сортируем resource-группы по label.
         usort($resourceGroups, static fn ($a, $b) => strcmp($a['label'], $b['label']));
@@ -208,7 +208,7 @@ final class RoleResource extends Resource
         }
         if ($miscItems !== []) {
             sort($miscItems);
-            $result[] = ['label' => 'Прочие', 'items' => array_values(array_unique($miscItems))];
+            $result[] = ['label' => (string) __('Прочие'), 'items' => array_values(array_unique($miscItems))];
         }
 
         return $result;
@@ -220,7 +220,7 @@ final class RoleResource extends Resource
             TableColumn::make('id')->sort()->width('60px'),
             TableColumn::make('name')->sort()->search(),
             TableColumn::make('slug')->sort()->copyable(),
-            TableColumn::make('is_system')->asBoolean('Системная', 'Пользовательская'),
+            TableColumn::make('is_system')->asBoolean(__('Системная'), __('Пользовательская')),
             TableColumn::make('created_at')->sort()->asDateTime(),
         ];
     }

@@ -75,13 +75,13 @@ final class AuditLogResource extends Resource
     {
         return [
             OptionsFilter::for('event')->label(__('Событие'))->options([
-                'created' => 'Создание',
-                'updated' => 'Изменение',
-                'deleted' => 'Удаление',
-                'restored' => 'Восстановление',
-                'login' => 'Вход',
-                'logout' => 'Выход',
-                'login_failed' => 'Неудачный вход',
+                'created' => __('Создание'),
+                'updated' => __('Изменение'),
+                'deleted' => __('Удаление'),
+                'restored' => __('Восстановление'),
+                'login' => __('Вход'),
+                'logout' => __('Выход'),
+                'login_failed' => __('Неудачный вход'),
             ]),
             InputFilter::for('actor_type')->label(__('Actor type')),
             InputFilter::for('subject_type')->label(__('Subject type')),
@@ -119,7 +119,7 @@ final class AuditLogResource extends Resource
             TextEntry::make('url')->label(__('URL'))->copyable(),
             TextEntry::make('created_at')->label(__('Создано'))->asDateTime(),
             KeyValueEntry::make('changes')->label(__('Изменения'))
-                ->keyLabel('Поле')->valueLabel('Значение'),
+                ->keyLabel(__('Поле'))->valueLabel(__('Значение')),
         ];
     }
 }
