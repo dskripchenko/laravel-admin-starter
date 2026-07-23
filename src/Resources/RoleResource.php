@@ -46,7 +46,7 @@ final class RoleResource extends Resource
 
     public static function label(): string
     {
-        return 'Роли';
+        return __('Роли');
     }
 
     /**
@@ -81,17 +81,17 @@ final class RoleResource extends Resource
         $flat = array_values(array_unique($flat));
 
         return [
-            Input::make('name')->required()->title('Имя'),
-            Slug::make('slug')->from('name')->required()->title('Slug'),
-            Textarea::make('description')->title('Описание'),
+            Input::make('name')->required()->title(__('Имя')),
+            Slug::make('slug')->from('name')->required()->title(__('Slug')),
+            Textarea::make('description')->title(__('Описание')),
             TagsInput::make('permissions')
                 ->required()
                 ->default([])
-                ->title('Permission keys')
+                ->title(__('Permission keys'))
                 ->help('Введите ключ и нажмите Enter. Поддерживаются glob-маски: admin.content.* / admin.*.view / *. Список подсказок собран из всех зарегистрированных Resource\'ов и sister-pack\'ов.')
                 ->suggestions($flat)
                 ->suggestionsByGroup($groups),
-            Switcher::make('is_system')->title('Системная роль (read-only после create)'),
+            Switcher::make('is_system')->title(__('Системная роль (read-only после create)')),
         ];
     }
 
@@ -228,7 +228,7 @@ final class RoleResource extends Resource
     public function filters(): array
     {
         return [
-            InputFilter::for('slug')->label('Slug'),
+            InputFilter::for('slug')->label(__('Slug')),
         ];
     }
 }

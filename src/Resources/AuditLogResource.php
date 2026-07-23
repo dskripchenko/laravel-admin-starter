@@ -44,7 +44,7 @@ final class AuditLogResource extends Resource
 
     public static function label(): string
     {
-        return 'Журнал аудита';
+        return __('Журнал аудита');
     }
 
     public function columns(): array
@@ -62,9 +62,9 @@ final class AuditLogResource extends Resource
             ]),
             // Человекочитаемые ярлыки вместо FQCN (BL-4). Сырой тип остаётся
             // фильтруемым (filters ниже) и виден в detail-view.
-            TableColumn::make('actor_label')->label('Actor'),
+            TableColumn::make('actor_label')->label(__('Actor')),
             TableColumn::make('actor_id')->align('right'),
-            TableColumn::make('subject_label')->label('Subject'),
+            TableColumn::make('subject_label')->label(__('Subject')),
             TableColumn::make('subject_id')->align('right'),
             TableColumn::make('ip')->copyable(),
             TableColumn::make('created_at')->sort()->asDateTime(),
@@ -74,7 +74,7 @@ final class AuditLogResource extends Resource
     public function filters(): array
     {
         return [
-            OptionsFilter::for('event')->label('Событие')->options([
+            OptionsFilter::for('event')->label(__('Событие'))->options([
                 'created' => 'Создание',
                 'updated' => 'Изменение',
                 'deleted' => 'Удаление',
@@ -83,10 +83,10 @@ final class AuditLogResource extends Resource
                 'logout' => 'Выход',
                 'login_failed' => 'Неудачный вход',
             ]),
-            InputFilter::for('actor_type')->label('Actor type'),
-            InputFilter::for('subject_type')->label('Subject type'),
-            DateRangeFilter::for('created_at')->label('Период'),
-            InputFilter::for('ip')->label('IP'),
+            InputFilter::for('actor_type')->label(__('Actor type')),
+            InputFilter::for('subject_type')->label(__('Subject type')),
+            DateRangeFilter::for('created_at')->label(__('Период')),
+            InputFilter::for('ip')->label(__('IP')),
         ];
     }
 
@@ -98,8 +98,8 @@ final class AuditLogResource extends Resource
     public function infolist(): array
     {
         return [
-            TextEntry::make('id')->label('ID'),
-            BadgeEntry::make('event')->label('Событие')->colors([
+            TextEntry::make('id')->label(__('ID')),
+            BadgeEntry::make('event')->label(__('Событие'))->colors([
                 'created' => 'success',
                 'updated' => 'info',
                 'deleted' => 'danger',
@@ -108,17 +108,17 @@ final class AuditLogResource extends Resource
                 'logout' => 'default',
                 'login_failed' => 'danger',
             ]),
-            TextEntry::make('actor_label')->label('Actor'),
-            TextEntry::make('actor_type')->label('Actor type (class)')->copyable(),
-            TextEntry::make('actor_id')->label('Actor id'),
-            TextEntry::make('subject_label')->label('Subject'),
-            TextEntry::make('subject_type')->label('Subject type (class)')->copyable(),
-            TextEntry::make('subject_id')->label('Subject id'),
-            TextEntry::make('ip')->label('IP')->copyable(),
-            TextEntry::make('user_agent')->label('User-Agent'),
-            TextEntry::make('url')->label('URL')->copyable(),
-            TextEntry::make('created_at')->label('Создано')->asDateTime(),
-            KeyValueEntry::make('changes')->label('Изменения')
+            TextEntry::make('actor_label')->label(__('Actor')),
+            TextEntry::make('actor_type')->label(__('Actor type (class)'))->copyable(),
+            TextEntry::make('actor_id')->label(__('Actor id')),
+            TextEntry::make('subject_label')->label(__('Subject')),
+            TextEntry::make('subject_type')->label(__('Subject type (class)'))->copyable(),
+            TextEntry::make('subject_id')->label(__('Subject id')),
+            TextEntry::make('ip')->label(__('IP'))->copyable(),
+            TextEntry::make('user_agent')->label(__('User-Agent')),
+            TextEntry::make('url')->label(__('URL'))->copyable(),
+            TextEntry::make('created_at')->label(__('Создано'))->asDateTime(),
+            KeyValueEntry::make('changes')->label(__('Изменения'))
                 ->keyLabel('Поле')->valueLabel('Значение'),
         ];
     }

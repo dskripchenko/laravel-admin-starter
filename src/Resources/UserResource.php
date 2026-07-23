@@ -42,25 +42,25 @@ final class UserResource extends Resource
 
     public static function label(): string
     {
-        return 'Пользователи';
+        return __('Пользователи');
     }
 
     public function fields(): array
     {
         return [
-            Input::make('name')->required()->title('Имя'),
-            Input::make('email')->required()->title('Email'),
-            Password::make('password')->onCreate()->onUpdate(false)->required()->title('Пароль'),
+            Input::make('name')->required()->title(__('Имя')),
+            Input::make('email')->required()->title(__('Email')),
+            Password::make('password')->onCreate()->onUpdate(false)->required()->title(__('Пароль')),
             Select::make('locale')->options([
                 'ru' => 'Русский',
                 'en' => 'English',
-            ])->title('Локаль'),
+            ])->title(__('Локаль')),
             Select::make('theme')->options([
                 'light' => 'Светлая',
                 'dark' => 'Тёмная',
                 'system' => 'Как в системе',
-            ])->title('Тема'),
-            Switcher::make('is_active')->title('Активен'),
+            ])->title(__('Тема')),
+            Switcher::make('is_active')->title(__('Активен')),
         ];
     }
 
@@ -82,12 +82,12 @@ final class UserResource extends Resource
     public function filters(): array
     {
         return [
-            InputFilter::for('email')->label('Email'),
-            OptionsFilter::for('is_active')->label('Статус')->options([
+            InputFilter::for('email')->label(__('Email')),
+            OptionsFilter::for('is_active')->label(__('Статус'))->options([
                 '1' => 'Активные',
                 '0' => 'Заблокированные',
             ]),
-            OptionsFilter::for('locale')->label('Локаль')->options([
+            OptionsFilter::for('locale')->label(__('Локаль'))->options([
                 'ru' => 'Русский',
                 'en' => 'English',
             ]),
