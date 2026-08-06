@@ -1,6 +1,6 @@
 # dskripchenko/laravel-admin-starter
 
-> 🌐 [English](README.md) · [Русский](README.ru.md) · [Deutsch](README.de.md) · **中文**
+> 🌐 [English](../../README.md) · [Русский](../ru/README.md) · [Deutsch](../de/README.md) · **中文**
 
 开箱即用的管理资源：Users、Roles、AuditLog、Settings、Translations、ContentBlocks。新管理面板的即插即用起点。
 
@@ -17,9 +17,9 @@ php artisan migrate
 
 ## 文档
 
-- [快速开始](docs/en/getting-started.md) (en)
-- [使用](docs/en/usage.md) (en)
+- [快速开始](../../docs/en/getting-started.md) (en)
+- [使用](../../docs/en/usage.md) (en)
 
 ## 许可证
 
-[MIT](LICENSE) © Denis Skripchenko
+[MIT](../../LICENSE) © Denis Skripchenko

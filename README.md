@@ -1,6 +1,6 @@
 # dskripchenko/laravel-admin-starter
 
-> 🌐 **English** · [Русский](README.ru.md) · [Deutsch](README.de.md) · [中文](README.zh.md)
+> 🌐 **English** · [Русский](docs/ru/README.md) · [Deutsch](docs/de/README.md) · [中文](docs/zh/README.md)
 
 Out-of-the-box admin resources: Users, Roles, AuditLog, Settings, Translations, ContentBlocks. Drop-in starting point for new admins.
 
