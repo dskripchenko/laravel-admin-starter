@@ -1,6 +1,6 @@
 {
     "name": "dskripchenko/laravel-admin-starter",
-    "description": "Готовые системные Resource'ы (Users, Roles, AuditLog, Settings, Translations, ContentBlocks) для dskripchenko/laravel-admin.",
+    "description": "Ready-made system resources (Users, Roles, AuditLog, Settings, Translations, ContentBlocks) for dskripchenko/laravel-admin.",
     "type": "library",
     "keywords": [
         "laravel",
