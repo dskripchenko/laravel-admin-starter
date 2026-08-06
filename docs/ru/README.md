@@ -5,7 +5,7 @@
 
 Готовые системные Resource'ы для `dskripchenko/laravel-admin`: Users, Roles, AuditLog, Settings, Translations, ContentBlocks.
 
-Полная спецификация: [laravel-admin/docs/sister-packs/starter.md](https://github.com/dskripchenko/laravel-admin/blob/main/docs/sister-packs/starter.md).
+Полная спецификация: [laravel-admin/docs/ru/sister-packs/starter.md](https://github.com/dskripchenko/laravel-admin/blob/main/docs/ru/sister-packs/starter.md).
 
 ## Статус
 
