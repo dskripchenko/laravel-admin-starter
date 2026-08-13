@@ -16,11 +16,11 @@ use Dskripchenko\LaravelAdmin\Table\TableColumn;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * AuditLogResource — view-only для `admin_audit_logs`.
+ * AuditLogResource — a view-only resource over `admin_audit_logs`.
  *
- * Read-only: list + view; нет create/update/delete (audit-history
- * immutable). UI рендерит inline diff old vs new (через core's
- * AuditTrail layout, не дублируется здесь).
+ * Read-only: list plus view; there is no create/update/delete (the audit history
+ * is immutable). The UI renders an inline old-versus-new diff (through the
+ * core's AuditTrail layout, which is not duplicated here).
  *
  * Permissions: admin.system.audit.view.
  */
@@ -60,8 +60,9 @@ final class AuditLogResource extends Resource
                 'logout' => 'default',
                 'login_failed' => 'danger',
             ]),
-            // Человекочитаемые ярлыки вместо FQCN (BL-4). Сырой тип остаётся
-            // фильтруемым (filters ниже) и виден в detail-view.
+            // Human-readable labels instead of an FQCN (BL-4). The raw type
+            // stays filterable (the filters below) and is visible in the detail
+            // view.
             TableColumn::make('actor_label')->label(__('Actor')),
             TableColumn::make('actor_id')->align('right'),
             TableColumn::make('subject_label')->label(__('Subject')),

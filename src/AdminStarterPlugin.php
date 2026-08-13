@@ -12,12 +12,12 @@ use Dskripchenko\LaravelAdminStarter\Resources\RoleResource;
 use Dskripchenko\LaravelAdminStarter\Resources\UserResource;
 
 /**
- * AdminStarterPlugin — готовый набор системных Resource'ов.
+ * AdminStarterPlugin — a ready-made set of system resources.
  *
- * Toggles в config('admin-starter.resources') управляют тем какие из
- * Resource'ов попадут в Admin manager. По умолчанию активны users / roles /
- * audit_log; settings / translations / content_blocks / sessions — не
- * реализованы в v0.1.
+ * The toggles in config('admin-starter.resources') decide which of the resources
+ * reach the Admin manager. users / roles / audit_log are active by default;
+ * settings / translations / content_blocks / sessions are not implemented in
+ * v0.1.
  */
 final class AdminStarterPlugin implements AdminPlugin
 {

@@ -18,13 +18,13 @@ use Dskripchenko\LaravelAdmin\Table\TableColumn;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * RoleResource — CRUD над `admin_roles`.
+ * RoleResource — the CRUD over `admin_roles`.
  *
  * Permissions: admin.system.roles.{view,create,update,delete}.
  *
- * Системные роли (`is_system = true`, например Super Admin) защищены от
- * deletion в core'е (через Concerns\GuardsSystemRoles, отдельно от этого
- * Resource'а).
+ * The system roles (`is_system = true`, Super Admin for instance) are protected
+ * from deletion in the core (through Concerns\GuardsSystemRoles, separately from
+ * this resource).
  */
 final class RoleResource extends Resource
 {
@@ -50,10 +50,11 @@ final class RoleResource extends Resource
     }
 
     /**
-     * Базовый query — скрывает роли иного домена (config
-     * `admin.roles.hidden_slug_prefixes`, напр. `client-*` из ADR-017). Один
-     * override закрывает и список, и прямой read/update/delete по URL, т.к.
-     * base Resource читает одиночную запись через modelQuery() (BL-3).
+     * The base query — it hides the roles of another domain (the config
+     * `admin.roles.hidden_slug_prefixes`, `client-*` from ADR-017 for
+     * instance). A single override covers both the list and a direct
+     * read/update/delete by URL, since the base resource reads a single row
+     * through modelQuery() (BL-3).
      */
     public function modelQuery(): Builder
     {
@@ -71,7 +72,7 @@ final class RoleResource extends Resource
     public function fields(): array
     {
         $groups = $this->collectPermissionGroups();
-        // flat-fallback для случая когда frontend не понимает groups.
+        // A flat fallback for the case where the frontend does not understand groups.
         $flat = [];
         foreach ($groups as $g) {
             foreach ($g['items'] as $item) {
@@ -96,18 +97,20 @@ final class RoleResource extends Resource
     }
 
     /**
-     * Собрать permission keys, сгруппированные по Resource'у / Plugin'у.
+     * Assemble the permission keys grouped by resource and by plugin.
      *
-     * Структура:
-     *   Group 1 — wildcards (*, admin.*, admin.*.view)
-     *   Group 2 — group-wildcards (admin.content.*, admin.shop.*.view, ...)
-     *   Group 3..N — по одной группе на каждый зарегистрированный Resource:
-     *                label = Resource::label() (русское имя),
-     *                items = [base.view, base.create, ..., base.*]
-     *   Group N+1..M — по одной группе на ItemPermission (sister-pack'и),
-     *                  если их keys ещё не покрыты Resource-группами.
+     * The structure:
+     *   Group 1 — the wildcards (*, admin.*, admin.*.view)
+     *   Group 2 — the group wildcards (admin.content.*, admin.shop.*.view, ...)
+     *   Groups 3..N — one group per registered resource:
+     *                 label = Resource::label() (the human name),
+     *                 items = [base.view, base.create, ..., base.*]
+     *   Groups N+1..M — one group per ItemPermission (the sister packs), when
+     *                   their keys are not already covered by the resource
+     *                   groups.
      *
-     * Frontend TagsField рендерит группы с sticky-заголовками + filter.
+     * The frontend's TagsField renders the groups with sticky headings and a
+     * filter.
      *
      * @return list<array{label: string, items: list<string>}>
      */
@@ -143,8 +146,8 @@ final class RoleResource extends Resource
             }
         }
 
-        // Plain-keys из PermissionRegistry: всё что не покрыто стандартными
-        // {base}.{action} keys (например admin.system.health.run).
+        // The plain keys from the PermissionRegistry: everything not covered by
+        // the standard {base}.{action} keys (admin.system.health.run, say).
         $covered = [];
         foreach ($resourceBases as $base => $_label) {
             foreach ($defaultActions as $a) {
@@ -157,7 +160,7 @@ final class RoleResource extends Resource
             if (isset($covered[$key])) {
                 continue;
             }
-            // Сопоставляем custom-key с ближайшим Resource по prefix'у.
+            // We match a custom key to the nearest resource by its prefix.
             $matched = null;
             foreach ($resourceBases as $base => $label) {
                 if (str_starts_with($key, $base.'.')) {
@@ -171,7 +174,7 @@ final class RoleResource extends Resource
                 $extraByResource[(string) __('Прочие')][] = $key;
             }
         }
-        // Добавляем custom-keys в существующие resource-группы либо в "Прочие".
+        // The custom keys are added to the existing resource groups or to "Other".
         foreach ($resourceGroups as &$g) {
             if (isset($extraByResource[$g['label']])) {
                 $g['items'] = array_values(array_unique(array_merge($g['items'], $extraByResource[$g['label']])));
@@ -180,7 +183,7 @@ final class RoleResource extends Resource
         unset($g);
         $miscItems = $extraByResource[(string) __('Прочие')] ?? [];
 
-        // Wildcard-группы сверху для скейл-grant'а.
+        // The wildcard groups go on top, for granting at scale.
         $globalWildcards = ['*', 'admin.*', 'admin.*.view', 'admin.*.create', 'admin.*.update', 'admin.*.delete'];
         $groupWildcards = [];
         foreach (array_keys($groupRoots) as $g) {
@@ -195,10 +198,10 @@ final class RoleResource extends Resource
         if ($groupWildcards !== []) {
             $result[] = ['label' => (string) __('Группы разделов'), 'items' => $groupWildcards];
         }
-        // Сортируем resource-группы по label.
+        // The resource groups are sorted by label.
         usort($resourceGroups, static fn ($a, $b) => strcmp($a['label'], $b['label']));
         foreach ($resourceGroups as $g) {
-            // Items внутри группы — сортируем оставив `{base}.*` сверху.
+            // The items inside a group are sorted with `{base}.*` left on top.
             $items = $g['items'];
             $wildcardItems = array_values(array_filter($items, static fn ($i) => str_ends_with($i, '.*')));
             $rest = array_values(array_filter($items, static fn ($i) => ! str_ends_with($i, '.*')));

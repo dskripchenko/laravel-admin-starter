@@ -10,8 +10,8 @@ use Dskripchenko\LaravelAdminStarter\Resources\RoleResource;
 use Dskripchenko\LaravelAdminStarter\Tests\TestCase;
 
 /**
- * BL-3 / BL-4 — сервисные системные ресурсы: скрытие ролей иного домена и
- * человекочитаемые типы в аудите.
+ * BL-3 / BL-4 — the service-side system resources: hiding the roles of another
+ * domain and human-readable types in the audit.
  */
 final class SystemResourceScopingTest extends TestCase
 {
@@ -50,7 +50,7 @@ final class SystemResourceScopingTest extends TestCase
             (new AuditLogResource)->columns(),
         );
 
-        // Колонки показывают ярлыки, а не сырой FQCN-тип.
+        // The columns show labels rather than the raw FQCN type.
         $this->assertContains('actor_label', $columnNames);
         $this->assertContains('subject_label', $columnNames);
         $this->assertNotContains('actor_type', $columnNames);

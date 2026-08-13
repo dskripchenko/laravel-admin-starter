@@ -15,12 +15,12 @@ use Dskripchenko\LaravelAdmin\Resource\Resource;
 use Dskripchenko\LaravelAdmin\Table\TableColumn;
 
 /**
- * UserResource — CRUD над таблицей `admin_users` (core's AdminUser).
+ * UserResource — the CRUD over the `admin_users` table (the core's AdminUser).
  *
  * Permissions: admin.system.users.{view,create,update,delete}.
  *
- * Поля в form: name / email / password (только при create) / locale /
- * theme / is_active.
+ * The form's fields: name / email / password (on create only) / locale / theme /
+ * is_active.
  */
 final class UserResource extends Resource
 {

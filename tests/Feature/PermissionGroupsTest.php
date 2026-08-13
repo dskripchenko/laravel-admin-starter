@@ -8,9 +8,9 @@ use Dskripchenko\LaravelAdminStarter\Resources\RoleResource;
 use Dskripchenko\LaravelAdminStarter\Tests\TestCase;
 
 /**
- * collectPermissionGroups() — группировка permission-подсказок для формы
- * ролей. Тестируется через публичный fields(): TagsInput несёт
- * suggestions (flat) + suggestionsByGroup (группы).
+ * collectPermissionGroups() — the grouping of the permission suggestions for the
+ * roles form. Tested through the public fields(): the TagsInput carries
+ * suggestions (flat) plus suggestionsByGroup (the groups).
  */
 final class PermissionGroupsTest extends TestCase
 {
@@ -48,7 +48,7 @@ final class PermissionGroupsTest extends TestCase
         $data = $this->collect();
         $labels = array_column($data['groups'], 'label');
 
-        // Стандартные starter-ресурсы зарегистрированы плагином.
+        // The standard starter resources are registered by the plugin.
         $this->assertContains('Пользователи', $labels);
         $this->assertContains('Роли', $labels);
 
@@ -59,7 +59,7 @@ final class PermissionGroupsTest extends TestCase
             }
         }
         $this->assertNotNull($roleGroup);
-        // base.* первым, затем CRUD-actions.
+        // base.* comes first, then the CRUD actions.
         $this->assertSame('admin.system.roles.*', $roleGroup['items'][0]);
         $this->assertContains('admin.system.roles.view', $roleGroup['items']);
         $this->assertContains('admin.system.roles.delete', $roleGroup['items']);
@@ -75,7 +75,7 @@ final class PermissionGroupsTest extends TestCase
             }
         }
 
-        // flat — uniq-надмножество groups (fallback для frontend'а без групп).
+        // flat is the unique superset of the groups (a fallback for a frontend without them).
         foreach (array_unique($allGrouped) as $item) {
             $this->assertContains($item, $data['flat']);
         }
@@ -85,7 +85,7 @@ final class PermissionGroupsTest extends TestCase
     public function test_group_wildcards_derived_from_permission_roots(): void
     {
         $groups = $this->collect()['groups'];
-        // admin.system.* / admin.system.*.view — из admin.system.{users,roles,audit}.
+        // admin.system.* / admin.system.*.view come from admin.system.{users,roles,audit}.
         $groupMasks = [];
         foreach ($groups as $g) {
             foreach ($g['items'] as $item) {
