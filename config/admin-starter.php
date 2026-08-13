@@ -5,12 +5,13 @@ declare(strict_types=1);
 return [
     /*
     |--------------------------------------------------------------------------
-    | Какие Resource'ы регистрировать
+    | Which resources to register
     |--------------------------------------------------------------------------
-    | Каждый ключ — toggle. Полный список реализован в Plugin'е; ключи в этом
-    | массиве используются как gate. По умолчанию core-набор (users / roles /
-    | audit_log) на. Optional resources (translations / content_blocks /
-    | sessions) v0.1 не реализованы — будут добавлены позже.
+    | Every key is a toggle. The full list is implemented in the plugin; the
+    | keys of this array act as the gate. The core set (users / roles /
+    | audit_log) is on by default. The optional resources (translations /
+    | content_blocks / sessions) are not implemented in v0.1 and will be added
+    | later.
     */
 
     'resources' => [
@@ -25,11 +26,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Меню-группа
+    | The menu group
     |--------------------------------------------------------------------------
-    | Resource'ы группируются под этой меткой в sidebar'е (через
-    | Resource::$group). Иконку и порядок core читает из Resource::$icon +
-    | Resource::menuOrder().
+    | The resources are grouped under this label in the sidebar (through
+    | Resource::$group). The core reads the icon and the order from
+    | Resource::$icon and Resource::menuOrder().
     */
 
     'menu_group' => 'Системные',
