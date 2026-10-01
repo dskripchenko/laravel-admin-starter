@@ -1,6 +1,6 @@
 {
     "name": "dskripchenko/laravel-admin-starter",
-    "description": "Ready-made system resources (Users, Roles, AuditLog, Settings, Translations, ContentBlocks) for dskripchenko/laravel-admin.",
+    "description": "Ready-made system resources (Users, Roles, Audit Log) for dskripchenko/laravel-admin.",
     "type": "library",
     "keywords": [
         "laravel",
@@ -9,8 +9,6 @@
         "users",
         "roles",
         "audit",
-        "settings",
-        "translations",
         "dskripchenko"
     ],
     "homepage": "https://github.com/dskripchenko/laravel-admin-starter",
@@ -27,7 +25,7 @@
     },
     "require": {
         "php": "^8.2",
-        "dskripchenko/laravel-admin": "^1.10.4"
+        "dskripchenko/laravel-admin": "^1.30"
     },
     "require-dev": {
         "larastan/larastan": "^3.0",
