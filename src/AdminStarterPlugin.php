@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dskripchenko\LaravelAdminStarter;
 
+use Composer\InstalledVersions;
 use Dskripchenko\LaravelAdmin\Admin;
 use Dskripchenko\LaravelAdmin\Permission\ItemPermission;
 use Dskripchenko\LaravelAdmin\Plugin\AdminPlugin;
@@ -15,9 +16,7 @@ use Dskripchenko\LaravelAdminStarter\Resources\UserResource;
  * AdminStarterPlugin — a ready-made set of system resources.
  *
  * The toggles in config('admin-starter.resources') decide which of the resources
- * reach the Admin manager. users / roles / audit_log are active by default;
- * settings / translations / content_blocks / sessions are not implemented in
- * v0.1.
+ * reach the Admin manager: users / roles / audit_log, all active by default.
  */
 final class AdminStarterPlugin implements AdminPlugin
 {
@@ -28,7 +27,15 @@ final class AdminStarterPlugin implements AdminPlugin
 
     public function version(): string
     {
-        return '0.1.0';
+        if (! class_exists(InstalledVersions::class)) {
+            return 'dev';
+        }
+
+        try {
+            return InstalledVersions::getPrettyVersion('dskripchenko/laravel-admin-starter') ?? 'dev';
+        } catch (\OutOfBoundsException) {
+            return 'dev';
+        }
     }
 
     public function register(): void
@@ -70,15 +77,15 @@ final class AdminStarterPlugin implements AdminPlugin
 
     private function buildPermissions(): ItemPermission
     {
-        return ItemPermission::group('Системные')
-            ->addPermission('admin.system.users.view', 'Пользователи: просмотр')
-            ->addPermission('admin.system.users.create', 'Пользователи: создание')
-            ->addPermission('admin.system.users.update', 'Пользователи: редактирование')
-            ->addPermission('admin.system.users.delete', 'Пользователи: удаление')
-            ->addPermission('admin.system.roles.view', 'Роли: просмотр')
-            ->addPermission('admin.system.roles.create', 'Роли: создание')
-            ->addPermission('admin.system.roles.update', 'Роли: редактирование')
-            ->addPermission('admin.system.roles.delete', 'Роли: удаление')
-            ->addPermission('admin.system.audit.view', 'Журнал аудита: просмотр');
+        return ItemPermission::group(__('Системные'))
+            ->addPermission('admin.system.users.view', __('Пользователи: просмотр'))
+            ->addPermission('admin.system.users.create', __('Пользователи: создание'))
+            ->addPermission('admin.system.users.update', __('Пользователи: редактирование'))
+            ->addPermission('admin.system.users.delete', __('Пользователи: удаление'))
+            ->addPermission('admin.system.roles.view', __('Роли: просмотр'))
+            ->addPermission('admin.system.roles.create', __('Роли: создание'))
+            ->addPermission('admin.system.roles.update', __('Роли: редактирование'))
+            ->addPermission('admin.system.roles.delete', __('Роли: удаление'))
+            ->addPermission('admin.system.audit.view', __('Журнал аудита: просмотр'));
     }
 }
