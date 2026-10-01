@@ -6,34 +6,54 @@ status: stable
 
 # Usage
 
+## Switching resources off
+
+Publish the config (`php artisan vendor:publish --tag=admin-starter-config`) and set a
+toggle to `false`:
+
 ```php
-// Disable specific resources you don't need:
-'starter' => [
+// config/admin-starter.php
+return [
     'resources' => [
-        'admin_users' => true,
-        'admin_roles' => true,
-        'audit_log' => true,
-        'settings' => true,
-        'translations' => false,
-        'content_blocks' => false,
+        'users' => true,
+        'roles' => true,
+        'audit_log' => false, // keep the audit log out of the panel
     ],
-],
+];
 ```
 
-To customize a resource, extend the starter resource and register your
-own:
+The permissions are registered regardless of the toggles, so existing roles that
+reference them stay valid.
+
+## Replacing a resource
+
+The starter resources are `final`. To customize one, switch it off and register your
+own resource over the same model:
 
 ```php
-class MyAdminUserResource extends \Dskripchenko\LaravelAdminStarter\Resources\AdminUserResource
+use Dskripchenko\LaravelAdmin\Facades\Admin;
+use Dskripchenko\LaravelAdmin\Field\Input;
+use Dskripchenko\LaravelAdmin\Models\AdminUser;
+use Dskripchenko\LaravelAdmin\Resource\Resource;
+
+final class MyUserResource extends Resource
 {
+    public static string $model = AdminUser::class;
+
+    public static function permission(): string
+    {
+        return 'admin.system.users'; // reuse the starter's permission keys
+    }
+
     public function fields(): array
     {
-        return array_merge(parent::fields(), [
+        return [
+            Input::make('name')->required()->title(__('Имя')),
             Input::make('phone'),
-        ]);
+        ];
     }
 }
 
-Admin::resources([MyAdminUserResource::class]);
+// config/admin-starter.php: 'users' => false
+Admin::resources([MyUserResource::class]);
 ```
-

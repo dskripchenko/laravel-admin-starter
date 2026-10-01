@@ -88,8 +88,8 @@ final class RoleResource extends Resource
             TagsInput::make('permissions')
                 ->required()
                 ->default([])
-                ->title(__('Permission keys'))
-                ->help('Введите ключ и нажмите Enter. Поддерживаются glob-маски: admin.content.* / admin.*.view / *. Список подсказок собран из всех зарегистрированных Resource\'ов и sister-pack\'ов.')
+                ->title(__('Ключи прав'))
+                ->help(__('Введите ключ и нажмите Enter. Поддерживаются glob-маски: admin.content.* / admin.*.view / *. Список подсказок собран из всех зарегистрированных Resource\'ов и sister-pack\'ов.'))
                 ->suggestions($flat)
                 ->suggestionsByGroup($groups),
             Switcher::make('is_system')->title(__('Системная роль (read-only после create)')),

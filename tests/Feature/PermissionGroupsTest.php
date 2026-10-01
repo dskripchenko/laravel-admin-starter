@@ -45,6 +45,10 @@ final class PermissionGroupsTest extends TestCase
 
     public function test_each_registered_resource_gets_group_with_crud_actions(): void
     {
+        // The labels below are the Russian source keys; an English locale
+        // would translate them through resources/lang/en.json.
+        app()->setLocale('ru');
+
         $data = $this->collect();
         $labels = array_column($data['groups'], 'label');
 
