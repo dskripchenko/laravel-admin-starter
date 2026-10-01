@@ -8,6 +8,30 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [Unreleased]
+
+### Added
+- English translations of every user-facing string in `resources/lang/en.json`, loaded
+  as JSON translations by the service provider.
+- A weekly scheduled CI run to catch drift against new core and Laravel releases.
+
+### Changed
+- The plugin's `version()` reports the installed package version (via
+  `Composer\InstalledVersions`) instead of a hardcoded `0.1.0`, falling back to `dev`.
+- All user-facing strings, including permission labels and the help text of the role
+  form, are wrapped in `__()` with Russian source text as the translation key, matching
+  the core. Audit log captions that used English keys (Actor, Subject, ...) now use
+  Russian keys too, so a Russian-locale panel no longer shows them in English.
+- The minimum supported core is `dskripchenko/laravel-admin` ^1.30.
+- README, package description and the documentation in all four languages describe what
+  the package actually ships (Users, Roles, Audit Log) and use the real publish tag,
+  `admin-starter-config`.
+
+### Removed
+- The unused config keys `resources.settings`, `resources.translations`,
+  `resources.content_blocks`, `resources.sessions` and `menu_group`; none of them had any
+  effect. Published configs that still contain them keep working.
+
 ## [v1.3.3] - 2026-07-23
 
 ### Changed
