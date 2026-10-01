@@ -51,4 +51,35 @@ final class PluginMetadataTest extends TestCase
             $this->assertNotSame('', trim($value), "empty translation for '$key'");
         }
     }
+
+    public function test_every_cyrillic_ui_string_in_src_has_an_english_translation(): void
+    {
+        /** @var array<string, string> $translations */
+        $translations = json_decode(
+            (string) file_get_contents(__DIR__.'/../../resources/lang/en.json'),
+            true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+
+        $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__.'/../../src'));
+        $checked = 0;
+        foreach ($files as $file) {
+            if (! $file->isFile() || $file->getExtension() !== 'php') {
+                continue;
+            }
+            $code = (string) file_get_contents($file->getPathname());
+            // __('...') calls plus the static $group captions the core localizes.
+            preg_match_all("/__\\('((?:[^'\\\\]|\\\\.)*)'\\)|\\\$group = '((?:[^'\\\\]|\\\\.)*)'/u", $code, $matches, PREG_SET_ORDER);
+            foreach ($matches as $match) {
+                $key = stripslashes($match[1] !== '' ? $match[1] : ($match[2] ?? ''));
+                if (! preg_match('/\p{Cyrillic}/u', $key)) {
+                    continue;
+                }
+                $checked++;
+                $this->assertArrayHasKey($key, $translations, "missing en.json key '$key' (".$file->getFilename().')');
+            }
+        }
+
+        $this->assertGreaterThan(0, $checked);
+    }
 }
