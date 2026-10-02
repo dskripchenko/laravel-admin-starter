@@ -50,6 +50,15 @@ final class RoleResource extends Resource
     }
 
     /**
+     * One record's name, for the panel's titles, confirmations and toasts
+     * ("Create role"). A core without singularLabel() ignores it.
+     */
+    public static function singularLabel(): string
+    {
+        return __('роль');
+    }
+
+    /**
      * The base query — it hides the roles of another domain (the config
      * `admin.roles.hidden_slug_prefixes`, `client-*` from ADR-017 for
      * instance). A single override covers both the list and a direct

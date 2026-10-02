@@ -47,6 +47,15 @@ final class AuditLogResource extends Resource
         return __('Журнал аудита');
     }
 
+    /**
+     * One record's name, for the panel's titles, confirmations and toasts
+     * ("Create log entry"). A core without singularLabel() ignores it.
+     */
+    public static function singularLabel(): string
+    {
+        return __('запись журнала');
+    }
+
     public function columns(): array
     {
         return [

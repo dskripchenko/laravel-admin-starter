@@ -45,6 +45,15 @@ final class UserResource extends Resource
         return __('Пользователи');
     }
 
+    /**
+     * One record's name, for the panel's titles, confirmations and toasts
+     * ("Create user"). A core without singularLabel() ignores it.
+     */
+    public static function singularLabel(): string
+    {
+        return __('пользователь');
+    }
+
     public function fields(): array
     {
         return [
