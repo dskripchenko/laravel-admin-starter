@@ -8,6 +8,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 Entries for releases published before this file existed were reconstructed from
 the tagged commit history.
 
+## [Unreleased]
+
+### Fixed
+- The users, roles and audit log tables had column headers made from the
+  column names ("Created at", "Locale", "Is system", "Event", "Actor id",
+  "Subject id"), English in every panel language. Every column now carries a
+  label, a source string translated per request.
+
 ## [1.4.1] — 2026-10-02
 
 ### Fixed

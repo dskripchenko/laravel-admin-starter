@@ -50,8 +50,8 @@ final class AuditLogResource extends Resource
     public function columns(): array
     {
         return [
-            TableColumn::make('id')->sort()->width('60px'),
-            TableColumn::make('event')->sort()->asBadge([
+            TableColumn::make('id')->label(__('ID'))->sort()->width('60px'),
+            TableColumn::make('event')->label(__('Событие'))->sort()->asBadge([
                 'created' => 'success',
                 'updated' => 'info',
                 'deleted' => 'danger',
@@ -64,11 +64,11 @@ final class AuditLogResource extends Resource
             // stays filterable (the filters below) and is visible in the detail
             // view.
             TableColumn::make('actor_label')->label(__('Инициатор')),
-            TableColumn::make('actor_id')->align('right'),
+            TableColumn::make('actor_id')->label(__('ID инициатора'))->align('right'),
             TableColumn::make('subject_label')->label(__('Объект')),
-            TableColumn::make('subject_id')->align('right'),
-            TableColumn::make('ip')->copyable(),
-            TableColumn::make('created_at')->sort()->asDateTime(),
+            TableColumn::make('subject_id')->label(__('ID объекта'))->align('right'),
+            TableColumn::make('ip')->label(__('IP'))->copyable(),
+            TableColumn::make('created_at')->label(__('Создано'))->sort()->asDateTime(),
         ];
     }
 

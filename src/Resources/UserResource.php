@@ -67,15 +67,15 @@ final class UserResource extends Resource
     public function columns(): array
     {
         return [
-            TableColumn::make('id')->sort()->width('60px'),
-            TableColumn::make('name')->sort()->search(),
-            TableColumn::make('email')->sort()->search()->copyable(),
-            TableColumn::make('locale')->asBadge([
+            TableColumn::make('id')->label(__('ID'))->sort()->width('60px'),
+            TableColumn::make('name')->label(__('Имя'))->sort()->search(),
+            TableColumn::make('email')->label(__('Email'))->sort()->search()->copyable(),
+            TableColumn::make('locale')->label(__('Язык'))->asBadge([
                 'ru' => 'default',
                 'en' => 'info',
             ]),
-            TableColumn::make('is_active')->asBoolean(__('Активен'), __('Заблокирован')),
-            TableColumn::make('created_at')->sort()->asDateTime(),
+            TableColumn::make('is_active')->label(__('Статус'))->asBoolean(__('Активен'), __('Заблокирован')),
+            TableColumn::make('created_at')->label(__('Создано'))->sort()->asDateTime(),
         ];
     }
 
