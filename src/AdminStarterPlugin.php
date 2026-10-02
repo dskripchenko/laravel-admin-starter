@@ -77,15 +77,19 @@ final class AdminStarterPlugin implements AdminPlugin
 
     private function buildPermissions(): ItemPermission
     {
-        return ItemPermission::group(__('Системные'))
-            ->addPermission('admin.system.users.view', __('Пользователи: просмотр'))
-            ->addPermission('admin.system.users.create', __('Пользователи: создание'))
-            ->addPermission('admin.system.users.update', __('Пользователи: редактирование'))
-            ->addPermission('admin.system.users.delete', __('Пользователи: удаление'))
-            ->addPermission('admin.system.roles.view', __('Роли: просмотр'))
-            ->addPermission('admin.system.roles.create', __('Роли: создание'))
-            ->addPermission('admin.system.roles.update', __('Роли: редактирование'))
-            ->addPermission('admin.system.roles.delete', __('Роли: удаление'))
-            ->addPermission('admin.system.audit.view', __('Журнал аудита: просмотр'));
+        // Source strings, not __() results: the group is registered once at
+        // boot, and core translates it in the locale of each request. A name
+        // translated here would be frozen in the boot locale and split from
+        // the system group the other packs share.
+        return ItemPermission::group('Системные')
+            ->addPermission('admin.system.users.view', 'Пользователи: просмотр')
+            ->addPermission('admin.system.users.create', 'Пользователи: создание')
+            ->addPermission('admin.system.users.update', 'Пользователи: редактирование')
+            ->addPermission('admin.system.users.delete', 'Пользователи: удаление')
+            ->addPermission('admin.system.roles.view', 'Роли: просмотр')
+            ->addPermission('admin.system.roles.create', 'Роли: создание')
+            ->addPermission('admin.system.roles.update', 'Роли: редактирование')
+            ->addPermission('admin.system.roles.delete', 'Роли: удаление')
+            ->addPermission('admin.system.audit.view', 'Журнал аудита: просмотр');
     }
 }

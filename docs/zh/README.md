@@ -10,7 +10,7 @@
 
 - PHP 8.2+
 - Laravel 11、12 或 13
-- `dskripchenko/laravel-admin` ^1.30
+- `dskripchenko/laravel-admin` ^1.33
 
 ## 安装
 

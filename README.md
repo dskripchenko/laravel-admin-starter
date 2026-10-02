@@ -15,7 +15,7 @@ Application settings are not part of this package — they live in the core.
 
 - PHP 8.2+
 - Laravel 11, 12 or 13
-- `dskripchenko/laravel-admin` ^1.30
+- `dskripchenko/laravel-admin` ^1.33
 
 ## Install
 

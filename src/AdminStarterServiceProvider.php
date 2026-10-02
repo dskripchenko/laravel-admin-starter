@@ -15,9 +15,10 @@ final class AdminStarterServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/admin-starter.php', 'admin-starter');
 
-        // Registered here rather than in boot(): the plugin translates its
-        // permission labels while the panel boots, which may load the JSON
-        // translations before this provider's boot() would run.
+        // Registered here rather than in boot(): the translator caches a
+        // locale's JSON lines on first use, and anything that translates
+        // while the application boots would load them before this provider's
+        // boot() could add the path, so it would never be read.
         $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang');
 
         $this->registerAdminPlugin(AdminStarterPlugin::class);
