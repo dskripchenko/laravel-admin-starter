@@ -10,7 +10,7 @@ Ein Sister-Pack für [`dskripchenko/laravel-admin`](https://github.com/dskripche
 
 - PHP 8.2+
 - Laravel 11, 12 oder 13
-- `dskripchenko/laravel-admin` ^1.30
+- `dskripchenko/laravel-admin` ^1.33
 
 ## Installation
 
