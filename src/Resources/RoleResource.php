@@ -220,11 +220,11 @@ final class RoleResource extends Resource
     public function columns(): array
     {
         return [
-            TableColumn::make('id')->sort()->width('60px'),
-            TableColumn::make('name')->sort()->search(),
-            TableColumn::make('slug')->sort()->copyable(),
-            TableColumn::make('is_system')->asBoolean(__('Системная'), __('Пользовательская')),
-            TableColumn::make('created_at')->sort()->asDateTime(),
+            TableColumn::make('id')->label(__('ID'))->sort()->width('60px'),
+            TableColumn::make('name')->label(__('Имя'))->sort()->search(),
+            TableColumn::make('slug')->label(__('Slug'))->sort()->copyable(),
+            TableColumn::make('is_system')->label(__('Тип'))->asBoolean(__('Системная'), __('Пользовательская')),
+            TableColumn::make('created_at')->label(__('Создано'))->sort()->asDateTime(),
         ];
     }
 

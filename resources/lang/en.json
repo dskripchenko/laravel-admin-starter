@@ -49,10 +49,12 @@
     "Создано": "Created at",
     "Статус": "Status",
     "Тема": "Theme",
+    "Тип": "Type",
     "Тип инициатора": "Actor type",
     "Тип инициатора (класс)": "Actor type (class)",
     "Тип объекта": "Subject type",
     "Тип объекта (класс)": "Subject type (class)",
     "Тёмная": "Dark",
-    "Удаление": "Delete"
+    "Удаление": "Delete",
+    "Язык": "Language"
 }
